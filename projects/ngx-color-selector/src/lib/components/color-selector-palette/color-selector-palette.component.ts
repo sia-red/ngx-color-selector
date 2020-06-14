@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { BytelabsColorSelectorService } from '../../services/color-selector.service';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { NgxColorSelectorService } from '../../services/color-selector.service';
 import { IColor } from '../../interfaces/color';
 import { ISwatchSize } from '../../interfaces/swatch-size';
 import { PaletteDirection } from '../../interfaces/palette-direction';
 import { PalettePosition } from '../../interfaces/palette-position';
 
 @Component({
-    selector: 'bytelabs-color-selector-palette',
+    selector: 'color-selector-palette',
     templateUrl: 'color-selector-palette.component.html',
     styleUrls: ['./color-selector-palette.component.scss']
 })
-export class BytelabsColorSelectorPaletteComponent implements OnInit {
+export class NgxColorSelectorPaletteComponent implements OnInit {
 
     PaletteDirection = PaletteDirection;
 
@@ -30,10 +30,10 @@ export class BytelabsColorSelectorPaletteComponent implements OnInit {
 
     palette: IColor[] = this.colorSelectorService.config.palette;
 
-    public constructor(private colorSelectorService: BytelabsColorSelectorService) {
+    public constructor(private colorSelectorService: NgxColorSelectorService) {
         this.colorSelectorService.currentColor$.subscribe(color => {
             this.currentColor = color;
-        })
+        });
     }
 
     ngOnInit() {
@@ -81,8 +81,8 @@ export class BytelabsColorSelectorPaletteComponent implements OnInit {
 
     hoveredColor = (color: IColor, event: MouseEvent) => {
 
-        this.hoverLeft = (event.fromElement as any).offsetLeft - 2;
-        this.hoverTop = (event.fromElement as any).offsetTop - 2;
+        this.hoverLeft = (event.clientX) - 2;
+        this.hoverTop = (event.clientY as any).offsetTop - 2;
 
         this.hoverColor = color;
     }

@@ -8,7 +8,7 @@ const MIN_COLOR = 0;
 const MAX_COLOR = 255;
 
 @Injectable()
-export class BytelabsColorSelectorService {
+export class NgxColorSelectorService {
 
     private _config: ColorSelectorConfig = new ColorSelectorConfig();
 
@@ -58,7 +58,7 @@ export class BytelabsColorSelectorService {
         // Find a match for this color in the palette if it's there
         let match = this.config.palette.find(paletteColor => {
             return color.r === paletteColor.r && color.g === paletteColor.g && color.b === paletteColor.b;
-        })
+        });
 
         this._currentColor = match || color;
         this._currentColorSubject.next(this._currentColor);

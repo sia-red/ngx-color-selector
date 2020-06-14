@@ -1,26 +1,26 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, HostBinding } from '@angular/core';
 import { IColor } from '../../interfaces/color';
 import { PaletteDirection } from '../../interfaces/palette-direction';
-import { BytelabsColorSelectorService } from '../../services/color-selector.service';
+import { NgxColorSelectorService } from '../../services/color-selector.service';
 import { IColorSelectorConfig } from '../../color-selector-config';
 
 @Component({
-    selector: 'bytelabs-color-selector',
+    selector: 'ngx-color-selector',
     templateUrl: 'color-selector.component.html',
-    styleUrls: ['./color-selector.component.scss'],
-    providers: [BytelabsColorSelectorService],
-    host: {
-        '[style.height.px]': 'height',
-        '[style.width.px]': 'width'
-    }
+    styleUrls: ['./color-selector.component.scss']
 })
-export class BytelabsColorSelectorComponent implements OnInit {
+export class NgxColorSelectorComponent implements OnInit {
+    height: number;
+    width: number;
+
+    @HostBinding('style.height.px') hostHeight: number = this.height || 100;
+    @HostBinding('style.width.px') hostWidth: number = this.width || 400;
 
     public paletteDirection = PaletteDirection;
 
     private _color: IColor;
-    @Input()
-    set color(color: IColor) {
+
+    @Input() set color(color: IColor) {
         this.colorSelectorService.currentColor = color;
     }
 
@@ -32,12 +32,9 @@ export class BytelabsColorSelectorComponent implements OnInit {
 
     @Input() options: IColorSelectorConfig;
 
-    public showPalette: boolean = false;
+    showPalette = false;
 
-    public height: number;
-    public width: number;
-
-    constructor(private elementRef: ElementRef, private colorSelectorService: BytelabsColorSelectorService) {
+    constructor(private elementRef: ElementRef, private colorSelectorService: NgxColorSelectorService) {
 
         this.colorSelectorService.currentColor$.subscribe((color: IColor) => {
             this._color = color;
@@ -50,14 +47,12 @@ export class BytelabsColorSelectorComponent implements OnInit {
     }
 
     ngOnInit() {
-
         if (this.options) {
             this.colorSelectorService.config = this.options;
         }
     }
 
-    @HostListener('document:click', ['$event'])
-    clickOff() {
+    @HostListener('document:click', ['$event']) clickOff(event) {
         if (!this.showPalette) {
             return;
         }
@@ -67,7 +62,7 @@ export class BytelabsColorSelectorComponent implements OnInit {
         }
     }
 
-    public togglePalette() {
+    togglePalette() {
         this.showPalette = !this.showPalette;
     }
 }

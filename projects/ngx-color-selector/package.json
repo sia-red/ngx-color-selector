@@ -1,0 +1,22 @@
+{
+	"name": "@sia-red/ngx-color-selector",
+	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sia-red/ngx-color-selector"
+	},
+	"author": {
+		"name": "Enrique Shunnar",
+		"email": "eshunnar@sia.red"
+	},
+
+	"peerDependencies": {
+		"@angular/common": "^9.1.11",
+		"@angular/core": "^9.1.11",
+		"rxjs": "6.5.5",
+		"zone.js": "0.10.3"
+	},
+	"dependencies": {
+		"tslib": "^1.10.0"
+	}
+}

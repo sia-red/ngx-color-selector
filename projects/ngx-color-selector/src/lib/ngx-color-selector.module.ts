@@ -1,10 +1,9 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-
-import { BytelabsColorSelectorComponent } from './components/color-selector/color-selector.component';
-import { BytelabsColorSelectorPaletteComponent } from './components/color-selector-palette/color-selector-palette.component';
-import { BytelabsColorSelectorService } from './services/color-selector.service';
+import { NgxColorSelectorComponent } from './components/color-selector/color-selector.component';
+import { NgxColorSelectorPaletteComponent } from './components/color-selector-palette/color-selector-palette.component';
+import { NgxColorSelectorService } from './services/color-selector.service';
 
 export * from './components/color-selector/color-selector.component';
 export * from './components/color-selector-palette/color-selector-palette.component';
@@ -21,16 +20,14 @@ export * from './color-palettes/material-colors';
 export * from './color-selector-config';
 
 @NgModule({
+  declarations: [NgxColorSelectorComponent, NgxColorSelectorPaletteComponent],
   imports: [
     CommonModule
   ],
-  declarations: [
-    BytelabsColorSelectorComponent,
-    BytelabsColorSelectorPaletteComponent
-  ],
   exports: [
-    BytelabsColorSelectorComponent,
-    BytelabsColorSelectorPaletteComponent
-  ]
+    NgxColorSelectorComponent,
+    NgxColorSelectorPaletteComponent
+  ],
+  providers: [NgxColorSelectorService]
 })
-export class BytelabsColorSelectorModule { }
+export class NgxColorSelectorModule { }
